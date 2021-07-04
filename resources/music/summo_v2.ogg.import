@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/summo_v2.ogg-c9dbe877b3e0fc35af9900d9d9b0a402.oggstr"
+
+[deps]
+
+source_file="res://resources/music/summo_v2.ogg"
+dest_files=[ "res://.import/summo_v2.ogg-c9dbe877b3e0fc35af9900d9d9b0a402.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

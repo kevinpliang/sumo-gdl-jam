@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://resources/Silkscreen/slkscrb.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://resources/Silkscreen/slkscr.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://sprites/environments/DefaultStage.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 2 )
+
+[node name="Menu" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.264862
+margin_right = 0.264862
+custom_constants/margin_right = 30
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+custom_constants/margin_bottom = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 99.0
+margin_bottom = 98.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_top = 19.0
+margin_right = 69.0
+margin_bottom = 49.0
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 69.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 1 )
+text = "SUMO"
+align = 1
+valign = 1
+
+[node name="MenuOptions" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 21.0
+margin_right = 69.0
+margin_bottom = 30.0
+
+[node name="Start" type="Label" parent="CenterContainer/VBoxContainer/MenuOptions"]
+margin_right = 69.0
+margin_bottom = 9.0
+custom_fonts/font = SubResource( 2 )
+text = "PRESS [ENTER]"
+align = 1
+valign = 1
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 0.264862 )
+z_index = -1
+texture = ExtResource( 3 )
+offset = Vector2( 64, 64 )

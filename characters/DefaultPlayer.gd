@@ -3,6 +3,10 @@ extends KinematicBody2D
 # child nodes
 onready var sprite = $AnimatedSprite
 
+# sfx
+var push_sfx = load("res://resources/sfx/grunt1.wav")
+var hit_sfx = load("res://resources/sfx/ouchu_quick.wav")
+
 # motion variables
 var vel = Vector2.ZERO
 var speed = 25
@@ -107,6 +111,8 @@ func sprite_from_state():
 
 # Player push
 func push():
+	$SFXPlayer.stream = push_sfx
+	$SFXPlayer.play()
 	$PushTimer.start()
 	yield(get_tree().create_timer(0.6), "timeout")
 	$PushHitBox/Shape.disabled = false
@@ -115,6 +121,8 @@ func push():
 
 # When hit by a push
 func on_hit(from):
+	$SFXPlayer.stream = hit_sfx
+	$SFXPlayer.play()
 	hit_from = from
 	$HurtTimer.start()
 

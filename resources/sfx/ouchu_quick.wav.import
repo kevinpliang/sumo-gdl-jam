@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ouchu_quick.wav-75da3c96d16598f5fcdac1430808e1fe.sample"
+
+[deps]
+
+source_file="res://resources/sfx/ouchu_quick.wav"
+dest_files=[ "res://.import/ouchu_quick.wav-75da3c96d16598f5fcdac1430808e1fe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
