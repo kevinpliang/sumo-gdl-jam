@@ -14,7 +14,7 @@ var tutorialInstance = null
 # music
 var win_music = load("res://resources/music/summo_v2.ogg")
 var playing_music = load("res://resources/music/roundv2.ogg")
-var menu_music = load("res://resources/music/destory_him.ogg")
+var menu_music = load("res://resources/music/destrpyhim.ogg")
 
 func _ready():
 	Global.main = self
