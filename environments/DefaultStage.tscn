@@ -28,8 +28,8 @@ a = Vector2( 17.7735, -30.8461 )
 b = Vector2( -58.6402, -30.6588 )
 
 [sub_resource type="CapsuleShape2D" id=7]
-radius = 37.1396
-height = 27.1932
+radius = 31.9664
+height = 28.853
 
 [node name="DefaultStage" type="StaticBody2D"]
 z_index = -1
@@ -65,7 +65,7 @@ shape = SubResource( 6 )
 [node name="Bounds" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds"]
-position = Vector2( 64.2399, 64.4272 )
+position = Vector2( 63.689, 58.9113 )
 rotation = 1.5708
 shape = SubResource( 7 )
 
