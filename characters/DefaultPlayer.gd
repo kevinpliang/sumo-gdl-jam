@@ -14,7 +14,7 @@ var vel: Vector2 = Vector2.ZERO
 
 # states
 enum STATES { IDLE, WALK, PUSH, HURT }
-var current_state: int = STATES.IDLE
+@export var current_state: int = STATES.IDLE
 
 enum FACING { UP, DOWN }
 var facing: int = FACING.UP
@@ -41,8 +41,15 @@ func _ready() -> void:
 		facing = FACING.UP
 	else:
 		facing = FACING.DOWN
+		
+	if Global.multiplayer_enabled:
+		set_multiplayer_authority(name.to_int())
 
 func _physics_process(delta: float) -> void:
+	
+	if Global.multiplayer_enabled and !is_multiplayer_authority():
+		return
+	
 	if current_state not in busy_states and Global.curr_gamestate == Global.GAMESTATE.PLAYING:
 		state_from_input(delta)
 	motion_from_state(delta)
@@ -66,6 +73,7 @@ func state_from_input(_delta: float) -> void:
 			facing = FACING.DOWN
 	else:
 		current_state = STATES.IDLE
+
 
 # Gets motion based on state
 func motion_from_state(delta: float) -> void:
@@ -133,11 +141,14 @@ func push() -> void:
 	$PushHitBox/CollisionShape2D.disabled = true
 
 # When hit by a push
+@rpc("any_peer", "call_local")
 func on_hit(from: int) -> void:
 	var sfx_player: AudioStreamPlayer = $SFXPlayer
 	sfx_player.stream = hit_sfx
 	sfx_player.play()
+	
 	hit_from = from
+	current_state = STATES.HURT
 	$HurtTimer.start()
 
 # When Push Timer ends
@@ -157,7 +168,10 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		current_state = STATES.HURT
 
 		# if the push is from below me
+		var from_dir = HITFROM.NOT
 		if area.get_parent().global_position.y > global_position.y:
-			on_hit(HITFROM.BELOW)
+			from_dir = HITFROM.BELOW
 		else:
-			on_hit(HITFROM.ABOVE)
+			from_dir = HITFROM.ABOVE
+		
+		rpc_id(get_multiplayer_authority(), "on_hit", from_dir)

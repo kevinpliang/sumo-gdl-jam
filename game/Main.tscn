@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://uwyb0p5f8j7r"]
+[gd_scene load_steps=8 format=3 uid="uid://uwyb0p5f8j7r"]
 
 [ext_resource type="Script" uid="uid://v2ee5rmxynkh" path="res://game/Main.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://dse2hkkbuyw2b" path="res://resources/Silkscreen/slkscr.ttf" id="2"]
+[ext_resource type="Script" uid="uid://b1tuos44opg8t" path="res://game/multiplayer_spawner.gd" id="2_2fjjk"]
+[ext_resource type="PackedScene" uid="uid://cuu4qwcbjtsdp" path="res://characters/DefaultPlayer.tscn" id="3_ljq5a"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("2")])
@@ -52,6 +54,12 @@ process_mode = 3
 script = ExtResource("1")
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Node2D"]
+_spawnable_scenes = PackedStringArray("uid://cuu4qwcbjtsdp")
+spawn_path = NodePath("..")
+script = ExtResource("2_2fjjk")
+network_player = ExtResource("3_ljq5a")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

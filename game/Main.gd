@@ -15,12 +15,16 @@ var win_music: AudioStream = preload("res://resources/music/summo_v2.ogg")
 var playing_music: AudioStream = preload("res://resources/music/roundv2.ogg")
 var menu_music: AudioStream = preload("res://resources/music/destrpyhim.ogg")
 
+
 func _ready() -> void:
 	Global.main = self
-
-	Global.player_oob.connect(on_player_oob)
 	Global.curr_gamestate = Global.GAMESTATE.MENU
 
+	# signals
+	Global.start_game.connect(_on_start_game)
+	Global.player_oob.connect(on_player_oob)
+	multiplayer.peer_connected.connect(_on_start_online_game)
+	
 	menuInstance = Global.instance_node(Menu, self)
 
 	# menu music
@@ -30,27 +34,25 @@ func _ready() -> void:
 	# add people
 	stageInstance = Global.instance_node(DefaultStage, self)
 	$Node2D.y_sort_enabled = true
-	Global.player1 = Global.instance_node_at(DefaultPlayer, Vector2(64, 64), $Node2D)
-	Global.player2 = Global.instance_node_at(DefaultPlayer, Vector2(64, 42), $Node2D)
-
-	# player 2 inputs
-	Global.player2.id = "p2"
-	Global.player2.up = "p2_up"
-	Global.player2.left = "p2_left"
-	Global.player2.down = "p2_down"
-	Global.player2.right = "p2_right"
-	Global.player2.a = "p2_a"
+	
+	# hide people
+	$UI/p1ScoreLabel.visible = false
+	$UI/p2ScoreLabel.visible = false
+	stageInstance.visible = false
 
 func _process(_delta: float) -> void:
 	pass
-
-func _input(event: InputEvent) -> void:
+	
+func _input(event):
 	if event.is_action_pressed("enter"):
-		match Global.curr_gamestate:
-			Global.GAMESTATE.WON, Global.GAMESTATE.MENU:
-				start_game()
+		if (Global.curr_gamestate == Global.GAMESTATE.WON):
+			if !Global.multiplayer_enabled:
+				_on_start_game()
+			else:
+				_on_start_online_game(0)
 
-func start_game() -> void:
+
+func _on_start_game() -> void:
 	menuInstance.visible = false
 	$UI/VictoryLabel.text = ""
 	$UI/p1ScoreLabel.visible = true
@@ -61,9 +63,21 @@ func start_game() -> void:
 		tutorialInstance = Global.instance_node_at(Tutorial, Vector2(64, 64), self)
 
 	# stage & players
+	if Global.player1 == null:
+		Global.player1 = Global.instance_node_at(DefaultPlayer, Vector2(64, 64), $Node2D)
+	if Global.player2 == null:
+		Global.player2 = Global.instance_node_at(DefaultPlayer, Vector2(64, 42), $Node2D)
 	Global.player1.visible = true
 	Global.player2.visible = true
 	stageInstance.visible = true
+	
+	# player 2 inputs
+	Global.player2.id = "p2"
+	Global.player2.up = "p2_up"
+	Global.player2.left = "p2_left"
+	Global.player2.down = "p2_down"
+	Global.player2.right = "p2_right"
+	Global.player2.a = "p2_a"
 
 	Global.player1.position = Vector2(64, 64)
 	Global.player2.position = Vector2(64, 42)
@@ -72,8 +86,30 @@ func start_game() -> void:
 
 	$Music.stream = playing_music
 	$Music.play()
+	
+func _on_start_online_game(_id: int) -> void:
+	menuInstance.visible = false
+	$UI/VictoryLabel.text = ""
+	$UI/p1ScoreLabel.visible = true
+	$UI/p2ScoreLabel.visible = true
 
-func on_player_oob(player_id: String) -> void:
+	# stage
+	stageInstance.visible = true
+	
+	if Global.player1 != null:
+		Global.player1.position = Vector2(64, 64)
+	if Global.player2 != null:
+		Global.player2.position = Vector2(64, 42)
+
+	Global.curr_gamestate = Global.GAMESTATE.PLAYING
+
+	$Music.stream = playing_music
+	$Music.play()
+	
+@rpc("any_peer", "call_local")
+func declare_winner(player_id: String) -> void:
+	print(player_id)
+	
 	if tutorialInstance:
 		tutorialInstance.visible = false
 		Global.firstTime = false
@@ -94,3 +130,11 @@ func on_player_oob(player_id: String) -> void:
 		Global.curr_gamestate = Global.GAMESTATE.WON
 		$Music.stream = win_music
 		$Music.play()
+
+
+func on_player_oob(player_id: String) -> void:
+	if Global.multiplayer_enabled:
+		if multiplayer.is_server():
+			rpc("declare_winner", player_id)
+	else:
+		declare_winner(player_id)
