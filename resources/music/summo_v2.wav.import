@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/summo_v2.wav-83caaaa6238a1b0d50db375b81500408.sample"
+type="AudioStreamWAV"
+uid="uid://b30qupqy5nmwi"
+path="res://.godot/imported/summo_v2.wav-83caaaa6238a1b0d50db375b81500408.sample"
 
 [deps]
 
 source_file="res://resources/music/summo_v2.wav"
-dest_files=[ "res://.import/summo_v2.wav-83caaaa6238a1b0d50db375b81500408.sample" ]
+dest_files=["res://.godot/imported/summo_v2.wav-83caaaa6238a1b0d50db375b81500408.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

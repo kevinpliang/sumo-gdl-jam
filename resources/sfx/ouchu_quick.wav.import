@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/ouchu_quick.wav-75da3c96d16598f5fcdac1430808e1fe.sample"
+type="AudioStreamWAV"
+uid="uid://byoymb71xoy2y"
+path="res://.godot/imported/ouchu_quick.wav-75da3c96d16598f5fcdac1430808e1fe.sample"
 
 [deps]
 
 source_file="res://resources/sfx/ouchu_quick.wav"
-dest_files=[ "res://.import/ouchu_quick.wav-75da3c96d16598f5fcdac1430808e1fe.sample" ]
+dest_files=["res://.godot/imported/ouchu_quick.wav-75da3c96d16598f5fcdac1430808e1fe.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

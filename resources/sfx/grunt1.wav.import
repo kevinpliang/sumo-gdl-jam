@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/grunt1.wav-e4a588d8342e3dd553ffba1311b7ea60.sample"
+type="AudioStreamWAV"
+uid="uid://wcsr2i6qg5i5"
+path="res://.godot/imported/grunt1.wav-e4a588d8342e3dd553ffba1311b7ea60.sample"
 
 [deps]
 
 source_file="res://resources/sfx/grunt1.wav"
-dest_files=[ "res://.import/grunt1.wav-e4a588d8342e3dd553ffba1311b7ea60.sample" ]
+dest_files=["res://.godot/imported/grunt1.wav-e4a588d8342e3dd553ffba1311b7ea60.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -1,63 +1,96 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://uwyb0p5f8j7r"]
 
-[ext_resource path="res://game/Main.gd" type="Script" id=1]
-[ext_resource path="res://resources/Silkscreen/slkscr.ttf" type="DynamicFontData" id=2]
+[ext_resource type="Script" uid="uid://v2ee5rmxynkh" path="res://game/Main.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://dse2hkkbuyw2b" path="res://resources/Silkscreen/slkscr.ttf" id="2"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 8
-font_data = ExtResource( 2 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("2")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/14/0/ascent = 0.0
+cache/0/14/0/descent = 0.0
+cache/0/14/0/underline_position = 0.0
+cache/0/14/0/underline_thickness = 0.0
+cache/0/14/0/scale = 1.0
+cache/0/12/0/ascent = 0.0
+cache/0/12/0/descent = 0.0
+cache/0/12/0/underline_position = 0.0
+cache/0/12/0/underline_thickness = 0.0
+cache/0/12/0/scale = 1.0
+cache/0/10/0/ascent = 0.0
+cache/0/10/0/descent = 0.0
+cache/0/10/0/underline_position = 0.0
+cache/0/10/0/underline_thickness = 0.0
+cache/0/10/0/scale = 1.0
+cache/0/8/0/ascent = 0.0
+cache/0/8/0/descent = 0.0
+cache/0/8/0/underline_position = 0.0
+cache/0/8/0/underline_thickness = 0.0
+cache/0/8/0/scale = 1.0
 
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 2 )
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("2")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 2 )
+[sub_resource type="FontFile" id="3"]
+fallbacks = Array[Font]([ExtResource("2")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
 [node name="Main" type="Node"]
-pause_mode = 2
-script = ExtResource( 1 )
+process_mode = 3
+script = ExtResource("1")
 
-[node name="YSort" type="YSort" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
 
 [node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VictoryLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="p1ScoreLabel" type="Label" parent="UI"]
-visible = false
-margin_right = 40.0
-margin_bottom = 14.0
-custom_fonts/font = SubResource( 2 )
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 14.0
+theme_override_fonts/font = SubResource("2")
 text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="p2ScoreLabel" type="Label" parent="UI"]
-visible = false
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -40.0
-margin_bottom = 17.0
+offset_left = -40.0
+offset_bottom = 17.0
 grow_horizontal = 0
-custom_fonts/font = SubResource( 3 )
+theme_override_fonts/font = SubResource("3")
 text = "0"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+horizontal_alignment = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
