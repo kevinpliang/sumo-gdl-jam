@@ -175,3 +175,6 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 			from_dir = HITFROM.ABOVE
 		
 		rpc_id(get_multiplayer_authority(), "on_hit", from_dir)
+		
+func _is_oob() -> bool:
+	return false

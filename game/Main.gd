@@ -96,20 +96,24 @@ func _on_start_online_game(_id: int) -> void:
 	# stage
 	stageInstance.visible = true
 	
-	if Global.player1 != null:
-		Global.player1.position = Vector2(64, 64)
-	if Global.player2 != null:
-		Global.player2.position = Vector2(64, 42)
+	if multiplayer.is_server():
+		if Global.player1 != null:
+			Global.player1.position = Vector2(64, 64)
+		if Global.player2 != null:
+			Global.player2.position = Vector2(64, 42)
 
 	Global.curr_gamestate = Global.GAMESTATE.PLAYING
 
 	$Music.stream = playing_music
 	$Music.play()
 	
-@rpc("any_peer", "call_local")
-func declare_winner(player_id: String) -> void:
-	print(player_id)
-	
+func on_player_oob(player_id: String) -> void:
+	if Global.multiplayer_enabled:
+		handle_win.rpc(player_id)
+	handle_win(player_id)
+
+@rpc
+func handle_win(player_id: String) -> void:
 	if tutorialInstance:
 		tutorialInstance.visible = false
 		Global.firstTime = false
@@ -130,11 +134,3 @@ func declare_winner(player_id: String) -> void:
 		Global.curr_gamestate = Global.GAMESTATE.WON
 		$Music.stream = win_music
 		$Music.play()
-
-
-func on_player_oob(player_id: String) -> void:
-	if Global.multiplayer_enabled:
-		if multiplayer.is_server():
-			rpc("declare_winner", player_id)
-	else:
-		declare_winner(player_id)

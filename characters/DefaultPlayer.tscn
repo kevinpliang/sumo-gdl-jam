@@ -165,6 +165,15 @@ y_sort_enabled = true
 motion_mode = 1
 safe_margin = 0.001
 script = ExtResource("3")
+speed = null
+knockback = null
+current_state = null
+id = null
+up = null
+left = null
+down = null
+right = null
+a = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("15")
